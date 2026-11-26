@@ -4,7 +4,7 @@
 
 **Building Next-Generation Intelligence and Immersive Digital Worlds.**
 
-[GitHub](https://github.com<あなたの組織ID>) • [Hugging Face](https://huggingface.co<あなたの組織ID>)
+[GitHub](https://github.com/Kovex-Codespace) • [Hugging Face](https://huggingface.co)
 
 </div>
 
@@ -24,8 +24,8 @@
 
 Explore our open-source repositories, pre-trained models, and interactive demos across our official platforms:
 
-- **Code & Open Source**: [://github.com<あなたの組織ID>](https://github.com<あなたの組織ID>)
-- **Models & Datasets**: [huggingface.co/<あなたの組織ID>](https://huggingface.co<あなたの組織ID>)
+- **Code & Open Source**: [github.com/Kovex-Codespace](https://github.com/Kovex-Codespace)
+- **Models & Datasets**: [huggingface.co/Kovex-Codespace](https://huggingface.co)
 
 ---
 
