@@ -738,6 +738,19 @@
             Googleでログイン
           </button>
           <div id="kaLoginMsg" class="ka-msg"></div>
+          <div style="border-top:1px solid var(--line);margin-top:22px;padding-top:20px">
+            <p class="ka-lead" style="margin-bottom:6px"><b>メールアドレスでログイン</b>（Googleアカウントがない方はこちら）</p>
+            <label for="kaEmailInput">メールアドレス</label>
+            <input id="kaEmailInput" type="email" autocomplete="email" placeholder="you@example.com" style="width:100%;background:var(--surface2);border:1px solid var(--line);border-radius:10px;color:var(--ink);padding:11px 12px;font-size:15px;font-family:inherit">
+            <label for="kaPasswordInput">パスワード</label>
+            <input id="kaPasswordInput" type="password" autocomplete="current-password" placeholder="6文字以上" style="width:100%;background:var(--surface2);border:1px solid var(--line);border-radius:10px;color:var(--ink);padding:11px 12px;font-size:15px;font-family:inherit">
+            <div class="ka-row">
+              <button id="kaEmailLoginBtn" class="ka-btn dark" type="button">メールでログイン</button>
+              <button id="kaEmailSignupBtn" class="ka-btn ghost" type="button">新規登録</button>
+              <button id="kaResetBtn" class="ka-btn ghost" type="button">パスワードを忘れた方</button>
+            </div>
+            <div id="kaEmailMsg" class="ka-msg"></div>
+          </div>
           <div class="ka-svcs">
             <div class="ka-svc"><h3>G-HUB</h3><p>無料ブラウザゲーム＆インディーゲーム投稿・即プレイプラットフォーム</p></div>
             <div class="ka-svc"><h3>Omnia</h3><p>ゲーム特化プログラミング言語と、そのコード実行環境</p></div>
@@ -1036,7 +1049,7 @@
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged }
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail }
   from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
 import { getFirestore, doc, getDoc, setDoc, serverTimestamp }
   from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
@@ -1121,7 +1134,51 @@ try {
     }
   });
 
+  function kaEmailError(e) {
+    const map = {
+      "auth/invalid-email": "メールアドレスの形式が正しくありません。",
+      "auth/missing-password": "パスワードを入力してください。",
+      "auth/weak-password": "パスワードは6文字以上にしてください。",
+      "auth/email-already-in-use": "このメールアドレスは登録済みです。「メールでログイン」をお試しください。",
+      "auth/invalid-credential": "メールアドレスかパスワードが違います。",
+      "auth/user-not-found": "このメールアドレスのアカウントが見つかりません。「新規登録」をお試しください。",
+      "auth/wrong-password": "パスワードが違います。",
+      "auth/too-many-requests": "試行回数が多すぎます。しばらく待ってからお試しください。",
+      "auth/operation-not-allowed": "Firebase側で「メール／パスワード」が有効になっていません。Authentication > ログイン方法 で有効化してください。",
+      "auth/unauthorized-domain": "このドメインはFirebaseの「承認済みドメイン」に未登録です。Authentication > 設定 > 承認済みドメイン に追加してください。"
+    };
+    return map[e.code] || ("エラーが発生しました。（" + (e.code || e.message) + "）");
+  }
+  function kaEmailValues() {
+    return { email: $("kaEmailInput").value.trim(), password: $("kaPasswordInput").value };
+  }
+  async function kaEmailLogin() {
+    const { email, password } = kaEmailValues();
+    const msg = $("kaEmailMsg");
+    if (!email || !password) { kaMsg(msg, "メールアドレスとパスワードを入力してください。", false); return; }
+    try { msg.textContent = "ログインしています…"; msg.className = "ka-msg"; await signInWithEmailAndPassword(auth, email, password); }
+    catch (e) { console.error(e); kaMsg(msg, kaEmailError(e), false); }
+  }
+  async function kaEmailSignup() {
+    const { email, password } = kaEmailValues();
+    const msg = $("kaEmailMsg");
+    if (!email || !password) { kaMsg(msg, "メールアドレスとパスワードを入力してください。", false); return; }
+    try { msg.textContent = "アカウントを作成しています…"; msg.className = "ka-msg"; await createUserWithEmailAndPassword(auth, email, password); }
+    catch (e) { console.error(e); kaMsg(msg, kaEmailError(e), false); }
+  }
+  async function kaReset() {
+    const { email } = kaEmailValues();
+    const msg = $("kaEmailMsg");
+    if (!email) { kaMsg(msg, "パスワード再設定には、まずメールアドレスを入力してください。", false); return; }
+    try { await sendPasswordResetEmail(auth, email); kaMsg(msg, "パスワード再設定のメールを送りました。受信箱をご確認ください。", true); }
+    catch (e) { console.error(e); kaMsg(msg, kaEmailError(e), false); }
+  }
+
   $("kaGoogleLoginBtn").addEventListener("click", kaLogin);
+  $("kaEmailLoginBtn").addEventListener("click", kaEmailLogin);
+  $("kaEmailSignupBtn").addEventListener("click", kaEmailSignup);
+  $("kaResetBtn").addEventListener("click", kaReset);
+  $("kaPasswordInput").addEventListener("keydown", (ev) => { if (ev.key === "Enter") kaEmailLogin(); });
   $("kaLogoutBtn").addEventListener("click", () => signOut(auth));
   $("kaSaveBtn").addEventListener("click", kaSave);
 } catch (e) {
