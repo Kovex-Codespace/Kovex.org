@@ -354,6 +354,7 @@
       <a href="#works">作品</a>
       <a href="#history">歩み</a>
       <a href="#future">今後の展開</a>
+        <a href="#account">アカウント</a>
       <a class="header-cta" href="https://ghub-zka1.onrender.com/" target="_blank" rel="noopener">▶ G-HUBで遊ぶ</a>
     </nav>
   </div>
@@ -693,6 +694,83 @@
     </div>
   </section>
 
+
+  <!-- ACCOUNT / KOVEX ID -->
+  <section id="account" style="padding-top:8px">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><span class="sec-num">08 — KOVEX ID</span><h2>Kovexアカウント — 共通ID「Kovex ID」</h2></div>
+        <p>G-HUB・Omniaなど、KovexGroupのサービスを1つのアカウントで使える共通IDです。パスワードはKovexでは預からず、Googleアカウントで安全にログインします。遊ぶだけなら今までどおり登録不要で、ログインは「記録を残したい人」のための入口です。</p>
+      </div>
+
+      <style>
+        .ka-card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:26px;box-shadow:var(--shadow)}
+        .ka-lead{color:var(--ink2);margin:0 0 18px}
+        .ka-btn{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line-strong);cursor:pointer;background:#fff;color:#1c2430;font-weight:900;font-size:15px;border-radius:999px;padding:12px 22px;min-height:48px;font-family:inherit}
+        .ka-btn:hover{box-shadow:0 8px 24px rgba(18,20,23,.16)}
+        .ka-btn.dark{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+        .ka-btn.ghost{background:transparent;color:var(--ink)}
+        .ka-btn:disabled{opacity:.55;cursor:wait}
+        .ka-gmark{width:20px;height:20px;flex:none}
+        .ka-hidden{display:none!important}
+        .ka-profile{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+        .ka-profile img{width:76px;height:76px;border-radius:50%;border:2px solid var(--teal);object-fit:cover;background:#eee}
+        .ka-kv{color:var(--muted);font-size:13px}
+        .ka-kv b{color:var(--ink);font-size:15px}
+        .ka-card label{display:block;font-size:13px;color:var(--muted);margin:16px 0 6px;font-weight:700}
+        .ka-card input[type="text"],.ka-card textarea{width:100%;background:var(--surface2);border:1px solid var(--line);border-radius:10px;color:var(--ink);padding:11px 12px;font-size:15px;font-family:inherit}
+        .ka-card textarea{min-height:76px;resize:vertical}
+        .ka-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;align-items:center}
+        .ka-msg{margin-top:14px;font-size:14px;line-height:1.7}
+        .ka-msg.ok{color:var(--teal)} .ka-msg.err{color:#c81e3a}
+        .ka-svcs{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-top:18px}
+        .ka-svc{border:1px solid var(--line);border-radius:14px;padding:16px;background:var(--surface2)}
+        .ka-svc h3{margin:0 0 6px;font-size:15px}
+        .ka-svc p{margin:0;color:var(--muted);font-size:13px;line-height:1.7}
+      </style>
+
+      <div class="ka-card">
+        <!-- 未ログイン -->
+        <div id="kaLoggedOut">
+          <p class="ka-lead">Kovex IDにログインすると、対応サービスで同じプロフィールが使えます。まずはGoogleアカウントでログインしてください。</p>
+          <button id="kaGoogleLoginBtn" class="ka-btn" type="button">
+            <svg class="ka-gmark" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 8 3l5.7-5.7C34.3 6.1 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 8 3l5.7-5.7C34.3 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.9 39.2 44 34 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
+            Googleでログイン
+          </button>
+          <div id="kaLoginMsg" class="ka-msg"></div>
+          <div class="ka-svcs">
+            <div class="ka-svc"><h3>G-HUB</h3><p>無料ブラウザゲーム＆インディーゲーム投稿・即プレイプラットフォーム</p></div>
+            <div class="ka-svc"><h3>Omnia</h3><p>ゲーム特化プログラミング言語と、そのコード実行環境</p></div>
+            <div class="ka-svc"><h3>今後のサービス</h3><p>AI・開発ツールなど、今後のKovexのサービスにも同じIDでログインできます</p></div>
+          </div>
+        </div>
+
+        <!-- ログイン中：マイページ -->
+        <div id="kaLoggedIn" class="ka-hidden">
+          <div class="ka-profile">
+            <img id="kaAvatar" alt="プロフィール画像">
+            <div>
+              <h3 id="kaHello" style="margin:0 0 4px;font-size:22px">マイページ</h3>
+              <div class="ka-kv">メール：<b id="kaEmail">-</b></div>
+              <div class="ka-kv">Kovex ID（UID）：<b id="kaUid">-</b></div>
+              <div class="ka-kv">登録日：<b id="kaCreated">-</b></div>
+            </div>
+          </div>
+          <label for="kaDisplayName">表示名</label>
+          <input id="kaDisplayName" type="text" maxlength="30" placeholder="表示名を入力">
+          <label for="kaBio">自己紹介</label>
+          <textarea id="kaBio" maxlength="200" placeholder="自己紹介を入力（任意）"></textarea>
+          <div class="ka-row">
+            <button id="kaSaveBtn" class="ka-btn dark" type="button">プロフィールを保存</button>
+            <button id="kaLogoutBtn" class="ka-btn ghost" type="button">ログアウト</button>
+          </div>
+          <div id="kaProfileMsg" class="ka-msg"></div>
+        </div>
+      </div>
+      <p class="ka-kv" style="margin-top:12px;line-height:1.8">※ ログインできるのは、Firebaseの「承認済みドメイン」に登録されたドメインでこのサイトを開いた場合だけです。このサイトを新しいドメインに置いた場合は、そのドメインの追加が必要です。</p>
+    </div>
+  </section>
+
   <!-- CTA -->
   <div class="wrap" style="padding-bottom:64px">
     <div class="cta-band">
@@ -702,6 +780,7 @@
         <a class="btn btn-ghostw" href="https://github.com/Kovex-Codespace" target="_blank" rel="noopener">GitHub — コードを見る ↗</a>
         <a class="btn btn-ghostw" href="https://huggingface.co/Kovex-Codespace" target="_blank" rel="noopener">Hugging Face — AIモデルを見る ↗</a>
         <a class="btn btn-ghostw" href="#omnia">Omniaのコードをもう一度見る ↑</a>
+        <a class="btn btn-ghostw" href="#account">Kovexアカウント — ログイン・マイページ</a>
       </div>
     </div>
   </div>
@@ -713,6 +792,7 @@
       <a class="logo" href="#top" style="font-size:22px"><span class="logo-mark logo-img-wrap"><img src="data:image/jpeg;base64,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" alt="Kovex 会社ロゴ" width="200" height="200" loading="lazy" /></span><span>KOVEX</span></a>
       <nav aria-label="フッターナビゲーション">
         <a href="#about">Kovexとは</a><a href="#ghub">G-HUB</a><a href="#omnia">Omnia</a><a href="#opensource">AI・OSS</a><a href="#works">作品</a><a href="#future">今後の展開</a>
+        <a href="#account">アカウント</a>
         <a href="https://ghub-zka1.onrender.com/" target="_blank" rel="noopener">G-HUB公式 ↗</a>
         <a href="https://github.com/Kovex-Codespace" target="_blank" rel="noopener">GitHub ↗</a>
         <a href="https://huggingface.co/Kovex-Codespace" target="_blank" rel="noopener">Hugging Face ↗</a>
@@ -952,6 +1032,101 @@
     }
   }
 })();
+</script>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged }
+  from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc, serverTimestamp }
+  from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
+
+/* Kovex ID（Firebase / プロジェクト: kovex-spaces）
+   firebaseConfig はサイトに公開して入れる前提の値です（秘密鍵ではありません）。
+   コンソールの表示と違う場合は、プロジェクトの設定 > マイアプリ の値に差し替えてください。 */
+const firebaseConfig = {
+  apiKey: "AIzaSyCdUPu2Umr0sTSeeHIjsELh4WrvoU2r-GM",
+  authDomain: "kovex-spaces.firebaseapp.com",
+  projectId: "kovex-spaces",
+  storageBucket: "kovex-spaces.firebasestorage.app",
+  messagingSenderId: "132736286400",
+  appId: "1:132736286400:web:f35f58c7e67a2e96337725",
+  measurementId: "G-9MBXNDR91Z"
+};
+
+try {
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+  const provider = new GoogleAuthProvider();
+  const $ = (id) => document.getElementById(id);
+  const outView = $("kaLoggedOut"), inView = $("kaLoggedIn");
+
+  function kaMsg(el, text, ok) { el.textContent = text; el.className = "ka-msg " + (ok ? "ok" : "err"); }
+
+  async function kaLogin() {
+    const msg = $("kaLoginMsg");
+    try {
+      msg.textContent = "Googleのログイン画面を開いています…"; msg.className = "ka-msg";
+      await signInWithPopup(auth, provider);
+    } catch (e) {
+      console.error(e);
+      let text = "ログインできませんでした。";
+      if (e.code === "auth/unauthorized-domain") text = "このドメインはFirebaseの「承認済みドメイン」に未登録です。Authentication > 設定 > 承認済みドメイン に、このサイトのドメインを追加してください。";
+      else if (e.code === "auth/popup-closed-by-user") text = "ログイン画面が閉じられました。もう一度お試しください。";
+      else if (e.code === "auth/popup-blocked") text = "ポップアップがブロックされました。ブラウザのポップアップ許可を有効にしてください。";
+      else if (e.code) text += "（" + e.code + "）";
+      kaMsg(msg, text, false);
+    }
+  }
+
+  async function kaLoadOrCreateProfile(user) {
+    const ref = doc(db, "users", user.uid);
+    const snap = await getDoc(ref);
+    if (snap.exists()) return snap.data();
+    const data = { displayName: user.displayName || "", photoURL: user.photoURL || "", email: user.email || "", bio: "", role: "user", createdAt: serverTimestamp(), updatedAt: serverTimestamp() };
+    await setDoc(ref, data);
+    return data;
+  }
+
+  async function kaSave() {
+    const user = auth.currentUser; if (!user) return;
+    const btn = $("kaSaveBtn"); btn.disabled = true;
+    try {
+      await setDoc(doc(db, "users", user.uid), { displayName: $("kaDisplayName").value.trim(), bio: $("kaBio").value.trim(), photoURL: user.photoURL || "", email: user.email || "", updatedAt: serverTimestamp() }, { merge: true });
+      $("kaHello").textContent = $("kaDisplayName").value.trim() || "マイページ";
+      kaMsg($("kaProfileMsg"), "保存しました。", true);
+    } catch (e) {
+      console.error(e);
+      kaMsg($("kaProfileMsg"), "保存できませんでした。Firestoreのルールが公開されているかご確認ください。", false);
+    } finally { btn.disabled = false; }
+  }
+
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) { outView.classList.remove("ka-hidden"); inView.classList.add("ka-hidden"); return; }
+    outView.classList.add("ka-hidden"); inView.classList.remove("ka-hidden");
+    $("kaEmail").textContent = user.email || "-";
+    $("kaUid").textContent = user.uid;
+    $("kaAvatar").src = user.photoURL || "";
+    $("kaHello").textContent = user.displayName || "マイページ";
+    try {
+      const profile = await kaLoadOrCreateProfile(user);
+      $("kaDisplayName").value = profile.displayName || user.displayName || "";
+      $("kaBio").value = profile.bio || "";
+      if (profile.displayName) $("kaHello").textContent = profile.displayName;
+      $("kaCreated").textContent = (profile.createdAt && profile.createdAt.toDate) ? profile.createdAt.toDate().toLocaleDateString("ja-JP") : "-";
+    } catch (e) {
+      console.error(e);
+      kaMsg($("kaProfileMsg"), "プロフィールの読み込みに失敗しました。Firestoreのルール公開をご確認ください。", false);
+    }
+  });
+
+  $("kaGoogleLoginBtn").addEventListener("click", kaLogin);
+  $("kaLogoutBtn").addEventListener("click", () => signOut(auth));
+  $("kaSaveBtn").addEventListener("click", kaSave);
+} catch (e) {
+  console.error("Kovex ID initialization failed:", e);
+}
 </script>
 </body>
 </html>
